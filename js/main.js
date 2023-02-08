@@ -3,7 +3,7 @@ var inputImg = document.querySelector('.input-form-photo');
 var myForm = document.querySelector('.myForm');
 
 inputImg.addEventListener('input', function (event) {
-  if (inputImg.value) {
+  if (inputImg.value && inputImg.checkValidity()) {
     userImg.src = inputImg.value;
   } else {
     userImg.src = 'images/placeholder-image-square.jpg';
