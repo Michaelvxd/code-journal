@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,10 +15,9 @@
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/styles.css">
 </head>
-
 <body>
   <header>
-    <div class="container">
+    <div class="container-one">
       <div class="row-header">
         <div class="column-full">
           <p class="jrnl-header">Code Journal</p>
@@ -35,41 +33,35 @@
             <p class="entry-txt">New Entry</p>
           </div>
         </div>
-        <div class="user-image">
-          <div class="column-full">
-            <img src="images/placeholder-image-square.jpg">
-          </div>
-        </div>
-        <div class="input">
-          <div class="column-full">
+        <div class="desktop-column">
+          <div class="user-image column-half">
             <div>
+              <img src="images/placeholder-image-square.jpg">
+            </div>
+          </div>
+          <div class="input-column">
+            <div class="input">
               <label>
                 Title
                 <input name="title" type="text" class="input-form" required>
               </label>
             </div>
-          </div>
-        </div>
-        <div class="input">
-          <div class="column-full">
-
             <div>
-              <label>
-                Photo URL
-                <input name="photo-url" type="url" class="input-form" required>
-              </label>
+              <div class="input">
+                <label>
+                  Photo URL
+                  <input name="photo-url" type="url" class="input-form" required>
+                </label>
+              </div>
             </div>
           </div>
         </div>
         <div class="input">
-          <div class="column-full">
-            <div>
-              <label>
-                Notes
-                <textarea name="notes" class="input-notes" rows="10" required>
-                </textarea>
-              </label>
-            </div>
+          <div>
+            <label>
+              Notes
+              <textarea name="notes" class="input-notes" rows="10" required></textarea>
+            </label>
           </div>
         </div>
         <div class="save">
@@ -82,5 +74,4 @@
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
 </body>
-
 </html>

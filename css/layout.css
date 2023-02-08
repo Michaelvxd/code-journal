@@ -1,5 +1,33 @@
+img {
+  border-radius: 4px;
+  width: 100%;
+}
+
+label {
+  font-family: "Proza Libre", sans-serif;
+  font-weight: 600;
+}
+
+textarea {
+  border: 1px solid #b6b6b6;
+  width: 100%;
+  border-radius: 3px;
+}
+
+textarea:focus {
+  border: 2px solid #562b81;
+  outline: none;
+}
+
 .hidden {
   display: none !important;
+}
+
+.container-one {
+  background-color: #562b81;
+  max-width: 575px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
 }
 
 .container {
@@ -21,6 +49,7 @@
 
 .row-header {
   background-color: #562b81;
+  width: 100%;
 }
 
 .jrnl-header {
@@ -36,11 +65,10 @@
 .entry-txt {
   margin: 0;
   font-family: "Proza Libre", sans-serif;
-  font-style: normal;
   font-weight: 600;
   font-size: 30px;
-  line-height: 41px;
   color: #292929;
+  padding: 10px 0;
 }
 
 .save {
@@ -58,20 +86,12 @@
   padding: 8px 12px;
 }
 
-img {
-  border-radius: 4px;
-  width: 100%;
-}
-
-.input {
-  margin-top: 10px;
-}
-
 .input-form {
   width: 100%;
   border-radius: 4px;
   border: 1px solid #b6b6b6;
   padding: 10px;
+  margin-bottom: 30px;
 }
 
 .input-form:focus {
@@ -79,30 +99,15 @@ img {
   outline: none;
 }
 
-.input-notes {
-  border: 1px solid #b6b6b6;
-}
-
-label {
-  font-family: "Proza Libre", sans-serif;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 22px;
-}
-
-textarea {
-  width: 100%;
-  border-radius: 3px;
-  border: 1px solid gray;
-}
-
-textarea:focus {
-  border: 2px solid #562b81;
-  outline: none;
+.user-image {
+  margin-bottom: 20px;
 }
 
 @media screen and (min-width: 768px) {
+  .container-one {
+    max-width: 900px;
+  }
+
   .container {
     max-width: 900px;
   }
@@ -113,6 +118,14 @@ textarea:focus {
   }
 
   .column-half {
+    width: 50%;
+  }
+
+  .desktop-column {
+    display: flex;
+  }
+
+  .input-column {
     width: 50%;
   }
 }
