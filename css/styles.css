@@ -104,16 +104,12 @@ view entries
 
 .entry-container {
   padding: 0;
-  flex-wrap: wrap;
-}
-
-.entry-text {
-  overflow: visible;
 }
 
 .entry-text h3 {
   font-size: 24px;
   word-wrap: break-word;
+  margin-top: 0;
 }
 
 .entry-text p {

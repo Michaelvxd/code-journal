@@ -47,7 +47,6 @@
 
   .stored-entry {
     display: flex;
-    flex-direction: row;
   }
 
   .entry-text {
