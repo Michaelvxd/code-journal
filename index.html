@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,13 +16,13 @@
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/styles.css">
 </head>
+
 <body>
   <header>
     <div class="container-one">
-      <div class="row-header">
-        <div class="column-full">
-          <p class="jrnl-header">Code Journal</p>
-        </div>
+      <div class="column-full">
+        <button class="jrnl-header">Code Journal</button>
+        <button class="view-entries">Entries</button>
       </div>
     </div>
   </header>
@@ -65,13 +66,22 @@
           </div>
         </div>
         <div class="save">
-          <button type="submit" name="save" class="save-btn">SAVE</button>
+          <button type="submit" name="save" class="btn">SAVE</button>
         </div>
       </form>
     </div>
-    <div data-view="entries" class="hidden"></div>
+    <div data-view="entries" class="entries">
+      <div class="entry-header column-full">
+        <h1>Entries</h1>
+        <button class="btn-new">NEW</button>
+      </div>
+      <p class="zero-entries hidden">No entries have been recorded.</p>
+      <ul class="entry-container hidden">
+      </ul>
+    </div>
   </main>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
 </body>
+
 </html>

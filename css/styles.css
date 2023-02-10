@@ -1,0 +1,126 @@
+* {
+  font-family: "Proza Libre", sans-serif;
+}
+
+img {
+  border-radius: 4px;
+  width: 100%;
+}
+
+label {
+  font-weight: 600;
+}
+
+textarea {
+  border: 1px solid #b6b6b6;
+  width: 100%;
+  border-radius: 3px;
+}
+
+textarea:focus {
+  border: 2px solid #562b81;
+  outline: none;
+}
+
+.container-one {
+  background-color: #562b81;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.jrnl-header,
+.view-entries {
+  margin: 0;
+  font-size: 20px;
+  color: white;
+  background-color: #562b81;
+  border: none;
+  cursor: pointer;
+}
+
+.entry-txt {
+  margin: 0;
+  font-weight: 600;
+  font-size: 30px;
+  color: #292929;
+  padding: 10px 0;
+}
+
+.save {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn,
+.btn-new {
+  background-color: #562b81;
+  color: white;
+  border-radius: 5px;
+  border: none;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.input-form,
+.input-form-photo {
+  width: 100%;
+  border-radius: 4px;
+  border: 1px solid #b6b6b6;
+  padding: 10px;
+  margin-bottom: 30px;
+}
+
+.input-form:focus,
+.input-form-photo:focus {
+  border: 2px solid #562b81;
+  outline: none;
+}
+
+.user-image {
+  margin-bottom: 20px;
+}
+
+/*
+
+view entries
+
+*/
+
+.entries .entry-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.entry-container li {
+  list-style-type: none;
+  margin-bottom: 50px;
+}
+
+.entry-container {
+  padding: 0;
+  flex-wrap: wrap;
+}
+
+.entry-text {
+  overflow: visible;
+}
+
+.entry-text h3 {
+  font-size: 24px;
+  word-wrap: break-word;
+}
+
+.entry-text p {
+  font-family: "Open Sans", sans-serif;
+  word-wrap: break-word;
+}
+
+.zero-entries {
+  text-align: center;
+}
