@@ -1,41 +1,12 @@
-img {
-  border-radius: 4px;
-  width: 100%;
-  object-fit: cover;
-}
-
-label {
-  font-family: "Proza Libre", sans-serif;
-  font-weight: 600;
-}
-
-textarea {
-  border: 1px solid #b6b6b6;
-  width: 100%;
-  border-radius: 3px;
-}
-
-textarea:focus {
-  border: 2px solid #562b81;
-  outline: none;
-}
-
 .hidden {
   display: none !important;
 }
 
+.container,
 .container-one {
-  background-color: #562b81;
   max-width: 575px;
   margin: 0 auto;
   padding: 0 1.5rem;
-}
-
-.container {
-  max-width: 575px;
-  margin: 0 auto;
-  padding: 0 1.5rem;
-  background-color: #f0f0f0;
 }
 
 .row {
@@ -46,64 +17,6 @@ textarea:focus {
 .column-full,
 .column-half {
   width: 100%;
-}
-
-.row-header {
-  background-color: #562b81;
-  width: 100%;
-}
-
-.jrnl-header {
-  margin: 0;
-  font-family: "Proza Libre", sans-serif;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 27px;
-  color: white;
-}
-
-.entry-txt {
-  margin: 0;
-  font-family: "Proza Libre", sans-serif;
-  font-weight: 600;
-  font-size: 30px;
-  color: #292929;
-  padding: 10px 0;
-}
-
-.save {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.save-btn {
-  background-color: #562b81;
-  color: white;
-  border-radius: 5px;
-  border: none;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  padding: 8px 12px;
-}
-
-.input-form,
-.input-form-photo {
-  width: 100%;
-  border-radius: 4px;
-  border: 1px solid #b6b6b6;
-  padding: 10px;
-  margin-bottom: 30px;
-}
-
-.input-form:focus,
-.input-form-photo:focus {
-  border: 2px solid #562b81;
-  outline: none;
-}
-
-.user-image {
-  margin-bottom: 20px;
 }
 
 @media screen and (min-width: 768px) {
@@ -130,5 +43,14 @@ textarea:focus {
 
   .input-column {
     width: 50%;
+  }
+
+  .stored-entry {
+    display: flex;
+  }
+
+  .entry-text {
+    margin-top: 0;
+    margin-left: 24px;
   }
 }
