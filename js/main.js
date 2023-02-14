@@ -28,8 +28,8 @@ myForm.addEventListener('submit', function (e) {
   formSubmission.title = myForm.elements.title.value;
   formSubmission.photoUrl = myForm.elements['photo-url'].value;
   formSubmission.userNotes = myForm.elements.notes.value;
-  formSubmission.EntryId = data.nextEntryId;
-  data.nextEntryId++;
+  formSubmission.entryIdNum = data.nextEntryId;
+  data.entryIdNum++;
 
   data.entries.unshift(formSubmission);
 
@@ -47,15 +47,20 @@ function renderEntry(entry) {
   var entryImg = document.createElement('img');
   var txtDiv = document.createElement('div');
   var entryTitle = document.createElement('h3');
+  var entryTitleIcon = document.createElement('i');
   var entryNotes = document.createElement('p');
   var entryTitleTxt = document.createTextNode(entry.title);
   var entryNotesTxt = document.createTextNode(entry.userNotes);
 
+  entryTitleIcon.setAttribute('class', 'fa fa-pencil');
+
+  entryList.setAttribute('class', 'stored-entry');
+  entryList.setAttribute('data-entry-id', entry.EntryId);
   imgDiv.setAttribute('class', 'user-image column-half');
   entryImg.setAttribute('src', entry.photoUrl);
-  entryList.setAttribute('class', 'stored-entry');
   entryImg.setAttribute('class', 'img');
   txtDiv.setAttribute('class', 'entry-text column-half');
+  entryTitle.appendChild(entryTitleIcon);
   entryTitle.appendChild(entryTitleTxt);
   entryNotes.appendChild(entryNotesTxt);
 
@@ -109,3 +114,24 @@ createNewEntry.addEventListener('click', function () {
 goHome.addEventListener('click', function () {
   viewSwap('entry-form');
 });
+
+entryUl.addEventListener('click', function (event) {
+  if (event.target.classList.contains('fa-pencil')) {
+    var editingEntryId = event.target.parentElement.parentElement.parentElement.dataset.entryId;
+    var entryIndex = data.entries.findIndex(entry => entry.EntryId === Number(editingEntryId));
+    data.editing = data.entries[entryIndex];
+
+    populateEditForm();
+    viewSwap('entry-form');
+  }
+});
+
+function populateEditForm() {
+  var editingEntry = data.editing;
+  myForm.elements.title.value = editingEntry.title;
+  myForm.elements['photo-url'].value = editingEntry.photoUrl;
+  myForm.elements.notes.value = editingEntry.userNotes;
+
+  var formTitle = document.querySelector('.entry-txt');
+  formTitle.textContent = 'Edit Entry';
+}
