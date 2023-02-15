@@ -1,3 +1,4 @@
+
 var userImg = document.querySelector('img');
 var inputImg = document.querySelector('.input-form-photo');
 var myForm = document.querySelector('.myForm');
@@ -8,7 +9,8 @@ var createNewEntry = document.querySelector('.btn-new');
 var goHome = document.querySelector('.jrnl-header');
 var allViews = [document.querySelector('[data-view="entry-form"]'),
   document.querySelector('[data-view="entries"]')];
-
+var formTitle = document.querySelector('.entry-txt');
+var baseImage = 'images/placeholder-image-square.jpg';
 toggleNoEntries();
 viewSwap(data.view);
 
@@ -16,27 +18,38 @@ inputImg.addEventListener('input', function (event) {
   if (inputImg.value && inputImg.checkValidity()) {
     userImg.src = inputImg.value;
   } else {
-    userImg.src = 'images/placeholder-image-square.jpg';
+    userImg.src = baseImage;
   }
 });
 
 myForm.addEventListener('submit', function (e) {
   e.preventDefault();
 
-  var formSubmission = {};
+  var formSubmission = {
+    title: myForm.elements.title.value,
+    photoUrl: myForm.elements['photo-url'].value,
+    userNotes: myForm.elements.notes.value,
+    entryIdPosition: data.nextEntryId
+  };
+  data.nextEntryId++;
 
-  formSubmission.title = myForm.elements.title.value;
-  formSubmission.photoUrl = myForm.elements['photo-url'].value;
-  formSubmission.userNotes = myForm.elements.notes.value;
-  formSubmission.entryIdNum = data.nextEntryId;
-  data.entryIdNum++;
+  if (data.editing === null) {
+    data.entries.unshift(formSubmission);
+    var addEntry = renderEntry(data.entries[0]);
+    entryUl.insertBefore(addEntry, entryUl.firstChild);
+  } else {
+    formSubmission.entryIdPosition = data.editing.entryIdPosition;
+    var editEntryIndex = data.entries.findIndex(entry => entry.entryIdPosition === formSubmission.entryIdPosition);
+    data.entries[editEntryIndex] = formSubmission;
+    var editedEntry = renderEntry(formSubmission);
+    var entryList = entryUl.querySelector(`[data-entry-id="${formSubmission.entryIdPosition}"]`);
+    entryList.parentNode.replaceChild(editedEntry, entryList);
+    myForm.querySelector('.entry-txt').textContent = 'New Entry';
+    data.editing = null;
+  }
 
-  data.entries.unshift(formSubmission);
-
-  userImg.src = 'images/placeholder-image-square.jpg';
+  userImg.src = baseImage;
   myForm.reset();
-  var addEntry = renderEntry(data.entries[0]);
-  entryUl.insertBefore(addEntry, entryUl.firstChild);
   viewSwap('entries');
   toggleNoEntries();
 });
@@ -51,17 +64,16 @@ function renderEntry(entry) {
   var entryNotes = document.createElement('p');
   var entryTitleTxt = document.createTextNode(entry.title);
   var entryNotesTxt = document.createTextNode(entry.userNotes);
-
   entryTitleIcon.setAttribute('class', 'fa fa-pencil');
-
   entryList.setAttribute('class', 'stored-entry');
-  entryList.setAttribute('data-entry-id', entry.EntryId);
+  entryList.setAttribute('data-entry-id', entry.entryIdPosition);
   imgDiv.setAttribute('class', 'user-image column-half');
   entryImg.setAttribute('src', entry.photoUrl);
   entryImg.setAttribute('class', 'img');
   txtDiv.setAttribute('class', 'entry-text column-half');
-  entryTitle.appendChild(entryTitleIcon);
   entryTitle.appendChild(entryTitleTxt);
+  entryTitle.appendChild(entryTitleIcon);
+
   entryNotes.appendChild(entryNotesTxt);
 
   imgDiv.appendChild(entryImg);
@@ -109,29 +121,37 @@ viewEntries.addEventListener('click', function () {
 
 createNewEntry.addEventListener('click', function () {
   viewSwap('entry-form');
+  resetFormValues();
 });
 
 goHome.addEventListener('click', function () {
   viewSwap('entry-form');
+  resetFormValues();
 });
 
 entryUl.addEventListener('click', function (event) {
   if (event.target.classList.contains('fa-pencil')) {
-    var editingEntryId = event.target.parentElement.parentElement.parentElement.dataset.entryId;
-    var entryIndex = data.entries.findIndex(entry => entry.EntryId === Number(editingEntryId));
-    data.editing = data.entries[entryIndex];
-
-    populateEditForm();
+    var editEntry = event.target.parentElement.parentElement.parentElement.dataset.entryId;
+    var editEntryIndex = data.entries.findIndex(entry => entry.entryIdPosition === Number(editEntry));
+    data.editing = data.entries[editEntryIndex];
+    populateEditForm(data.editing);
     viewSwap('entry-form');
   }
 });
 
 function populateEditForm() {
-  var editingEntry = data.editing;
-  myForm.elements.title.value = editingEntry.title;
-  myForm.elements['photo-url'].value = editingEntry.photoUrl;
-  myForm.elements.notes.value = editingEntry.userNotes;
-
-  var formTitle = document.querySelector('.entry-txt');
+  var populateEditEntry = data.editing;
+  myForm.elements.title.value = populateEditEntry.title;
+  myForm.elements['photo-url'].value = populateEditEntry.photoUrl;
+  userImg.src = populateEditEntry.photoUrl;
+  myForm.elements.notes.value = populateEditEntry.userNotes;
   formTitle.textContent = 'Edit Entry';
+}
+
+function resetFormValues() {
+  myForm.elements.title.value = '';
+  myForm.elements['photo-url'].value = '';
+  userImg.src = baseImage;
+  myForm.elements.notes.value = '';
+  formTitle.textContent = 'New Entry';
 }
