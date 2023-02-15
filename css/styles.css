@@ -110,6 +110,9 @@ view entries
   font-size: 24px;
   word-wrap: break-word;
   margin-top: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .entry-text p {
@@ -119,4 +122,8 @@ view entries
 
 .zero-entries {
   text-align: center;
+}
+
+.fa-pencil {
+  color: #562b81;
 }
