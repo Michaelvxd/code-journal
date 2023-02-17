@@ -66,6 +66,7 @@
           </div>
         </div>
         <div class="save">
+          <button type="button" name="delete" class="delete-btn hidden">Delete Entry</button>
           <button type="submit" name="save" class="btn">SAVE</button>
         </div>
       </form>
@@ -80,6 +81,15 @@
       </ul>
     </div>
   </main>
+  <div class="dialog-div">
+    <dialog class="delete-modal">
+      <p>Are you sure you want to delete this entry?</p>
+      <div class="dialog-btns">
+        <button type="button" class="cancel-btn">CANCEL</button>
+        <button type="button" class="confirm-btn">CONFIRM</button>
+      </div>
+    </dialog>
+  </div>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
 </body>
