@@ -1,8 +1,9 @@
-
 var userImg = document.querySelector('img');
 var inputImg = document.querySelector('.input-form-photo');
 var myForm = document.querySelector('.myForm');
 var entryUl = document.querySelector('.entry-container');
+var deleteBtn = document.querySelector('.delete-btn');
+var saveDiv = document.querySelector('.save');
 var zeroEntryTxt = document.querySelector('.zero-entries');
 var viewEntries = document.querySelector('.view-entries');
 var createNewEntry = document.querySelector('.btn-new');
@@ -11,6 +12,10 @@ var allViews = [document.querySelector('[data-view="entry-form"]'),
   document.querySelector('[data-view="entries"]')];
 var formTitle = document.querySelector('.entry-txt');
 var baseImage = 'images/placeholder-image-square.jpg';
+var deleteModal = document.querySelector('.delete-modal');
+var cancelBtn = deleteModal.querySelector('.cancel-btn');
+var confirmBtn = deleteModal.querySelector('.confirm-btn');
+
 toggleNoEntries();
 viewSwap(data.view);
 
@@ -64,6 +69,14 @@ function renderEntry(entry) {
   var entryNotes = document.createElement('p');
   var entryTitleTxt = document.createTextNode(entry.title);
   var entryNotesTxt = document.createTextNode(entry.userNotes);
+  var dialogDiv = document.createElement('div');
+  var dialog = document.createElement('dialog');
+  var dialogTxt = document.createElement('p');
+  var dialogBtnDiv = document.createElement('div');
+  var btnOne = document.createElement('button');
+  var btnTwo = document.createElement('button');
+  var cancelBtnTxt = document.createTextNode('CANCEL');
+  var confirmBtnTxt = document.createTextNode('CONFIRM');
   entryTitleIcon.setAttribute('class', 'fa fa-pencil');
   entryList.setAttribute('class', 'stored-entry');
   entryList.setAttribute('data-entry-id', entry.entryIdPosition);
@@ -71,6 +84,13 @@ function renderEntry(entry) {
   entryImg.setAttribute('src', entry.photoUrl);
   entryImg.setAttribute('class', 'img');
   txtDiv.setAttribute('class', 'entry-text column-half');
+  dialogDiv.setAttribute('class', 'dialog-div');
+  dialog.setAttribute('class', 'delete-modal');
+  dialogBtnDiv.setAttribute('class', 'dialog-btns');
+  btnOne.setAttribute('type', 'button');
+  btnOne.setAttribute('class', 'cancel-btn');
+  btnTwo.setAttribute('type', 'button');
+  btnOne.setAttribute('class', 'confirm-btn');
   entryTitle.appendChild(entryTitleTxt);
   entryTitle.appendChild(entryTitleIcon);
 
@@ -81,6 +101,14 @@ function renderEntry(entry) {
   entryList.appendChild(txtDiv);
   txtDiv.appendChild(entryTitle);
   txtDiv.appendChild(entryNotes);
+
+  dialogDiv.appendChild(dialog);
+  dialog.appendChild(dialogTxt);
+  dialog.appendChild(dialogBtnDiv);
+  dialogBtnDiv.appendChild(btnOne);
+  btnOne.appendChild(cancelBtnTxt);
+  dialogBtnDiv.appendChild(btnTwo);
+  btnTwo.appendChild(confirmBtnTxt);
 
   return entryList;
 }
@@ -146,6 +174,9 @@ function populateEditForm() {
   userImg.src = populateEditEntry.photoUrl;
   myForm.elements.notes.value = populateEditEntry.userNotes;
   formTitle.textContent = 'Edit Entry';
+  deleteBtn.classList.remove('hidden');
+  saveDiv.style['justify-content'] = 'space-between';
+
 }
 
 function resetFormValues() {
@@ -154,4 +185,28 @@ function resetFormValues() {
   userImg.src = baseImage;
   myForm.elements.notes.value = '';
   formTitle.textContent = 'New Entry';
+  deleteBtn.classList.add('hidden');
+  saveDiv.style['justify-content'] = 'flex-end';
 }
+
+deleteBtn.addEventListener('click', function () {
+  deleteModal.showModal();
+  deleteModal.setAttribute('data-entry-id', data.editing.entryIdPosition);
+});
+
+cancelBtn.addEventListener('click', function () {
+  deleteModal.close();
+});
+
+confirmBtn.addEventListener('click', function () {
+  var deleteEntryId = deleteModal.getAttribute('data-entry-id');
+  var deleteEntryIndex = data.entries.findIndex(entry => entry.entryIdPosition === parseInt(deleteEntryId));
+  data.entries.splice(deleteEntryIndex, 1);
+  var removeEntry = entryUl.querySelector(`[data-entry-id="${deleteEntryId}"]`);
+  removeEntry.remove();
+  data.editing = null;
+  deleteModal.close();
+  toggleNoEntries();
+  viewSwap('entries');
+
+});

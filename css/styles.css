@@ -52,6 +52,7 @@ textarea:focus {
 .save {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
 }
 
 .btn,
@@ -63,6 +64,13 @@ textarea:focus {
   margin-top: 10px;
   margin-bottom: 10px;
   padding: 8px 12px;
+  cursor: pointer;
+}
+
+.delete-btn {
+  color: red;
+  background-color: white;
+  border: none;
   cursor: pointer;
 }
 
@@ -126,4 +134,30 @@ view entries
 
 .fa-pencil {
   color: #562b81;
+}
+
+/*
+
+  Delete Modal
+*/
+
+.dialog-btns {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dialog-btns button {
+  border-radius: 4px;
+  border: none;
+  padding: 6px;
+}
+
+.cancel-btn {
+  background-color: darkgrey;
+}
+
+.confirm-btn {
+  background-color: red;
+  color: white;
 }
