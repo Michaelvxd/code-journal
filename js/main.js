@@ -200,7 +200,7 @@ cancelBtn.addEventListener('click', function () {
 
 confirmBtn.addEventListener('click', function () {
   var deleteEntryId = deleteModal.getAttribute('data-entry-id');
-  var deleteEntryIndex = data.entries.findIndex(entry => entry.entryIdPosition === parseInt(deleteEntryId));
+  var deleteEntryIndex = data.entries.findIndex(entry => entry.entryIdPosition === deleteEntryId);
   data.entries.splice(deleteEntryIndex, 1);
   var removeEntry = entryUl.querySelector(`[data-entry-id="${deleteEntryId}"]`);
   removeEntry.remove();
